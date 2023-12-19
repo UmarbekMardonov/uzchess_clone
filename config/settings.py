@@ -40,11 +40,29 @@ INSTALLED_APPS = [
 
     # install library
     'rest_framework',
+    'ckeditor',
+    'ckeditor_uploader',
+    # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+    'rest_framework_simplejwt',
 
     # local app
     'course',
     'news',
+    'library',
+    'authuser',
+    'cart',
 ]
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_FILENAME_GENERATOR = 'utils.get_filename'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': 600,
+    },
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
