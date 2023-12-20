@@ -2,6 +2,8 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
+from .models import UserModel, UserProfileModel
+from course.serializers import CourseBigSerializer
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
@@ -27,12 +29,8 @@ class RegisterSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField(write_only=True, required=True)
 
     class Meta:
-        model = User
-        fields = ('username', 'password', 'password2', 'email', 'first_name', 'last_name')
-        extra_kwargs = {
-            'first_name': {'required': True},
-            'last_name': {'required': True}
-        }
+        model = UserModel
+        fields = ('full_name', 'phone_number', 'email', 'password', 'password2')
 
     def validate(self, attrs):
         if attrs['password'] != attrs['password2']:
@@ -41,14 +39,23 @@ class RegisterSerializer(serializers.ModelSerializer):
         return attrs
 
     def create(self, validated_data):
-        user = User.objects.create(
-            username=validated_data['username'],
+        user = UserModel.objects.create(
+            full_name=validated_data['full_name'],
             email=validated_data['email'],
-            first_name=validated_data['first_name'],
-            last_name=validated_data['last_name']
+            password=validated_data['password'],
+            phone_number=validated_data['phone_number']
         )
 
         user.set_password(validated_data['password'])
         user.save()
 
         return user
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    user = RegisterSerializer()
+    course = CourseBigSerializer()
+
+    class Meta:
+        model = UserProfileModel
+        fields = '__all__'

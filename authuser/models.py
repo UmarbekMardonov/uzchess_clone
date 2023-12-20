@@ -1,15 +1,26 @@
 from django.db import models
-from django.contrib.auth.models import User
 from course.models import CourseBig
+from django.contrib.auth.models import AbstractUser
 
 
-class ProfileModel(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    full_name = models.CharField(max_length=220)
-    tel_number = models.CharField(max_length=220)
-    email = models.EmailField(blank=True, null=True)
-    course = models.ForeignKey(CourseBig, on_delete=models.CASCADE, blank=True, null=True)
-
+class UserModel(AbstractUser):
+    full_name = models.CharField(max_length=220, blank=True, null=True)
+    phone_number = models.CharField(max_length=30, blank=True, null=True)
+    email = models.EmailField()
+    date_joined = models.DateTimeField(auto_now_add=True)
+    first_name = None
+    last_name = None
+    is_staff = None
+    is_active = None
+    groups = None
+    user_permissions = None
+    username = None
+    last_login = None
 
     def __str__(self):
-        return self.user
+        return self.full_name
+
+
+class UserProfileModel(models.Model):
+    user = models.OneToOneField(UserModel, on_delete=models.CASCADE)
+    course = models.ManyToManyField(CourseBig)
