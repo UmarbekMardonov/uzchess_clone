@@ -23,7 +23,7 @@ urlpatterns = [
     path('news/', include('news.urls')),
     path('course/', include('course.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
-    path('authuser/', include('authuser.urls')),
+    path('auth/', include('authuser.urls')),
     path('library/', include('library.urls')),
 
 ]
