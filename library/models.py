@@ -14,7 +14,11 @@ class Book(models.Model):
     rating = models.DecimalField(max_digits=10, decimal_places=1, blank=True, null=True)
     pages_count = models.IntegerField(default=0)
     description = models.TextField()
-    wrote_date = models.IntegerField()
+    wrote_date = models.DateField()
+
+    @classmethod
+    def top_books(cls, count=10):
+        return Book.objects.all().filter(rating__isnull=False).order_by('-rating')[:count]
 
     def __str__(self):
         return self.title

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+# from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,6 +30,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,6 +44,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     # 'rest_framework_simplejwt.authentication.JWTAuthentication',
     'rest_framework_simplejwt',
+    'rosetta',
 
     # local app
     'course',
@@ -50,6 +53,18 @@ INSTALLED_APPS = [
     'authuser',
     'cart',
 ]
+
+gettext = lambda s: s
+LANGUAGES = (
+    ('uz', gettext('Uzbek')),
+    ('en', gettext('English')),
+)
+
+MODELTRANSLATION_LANGUAGES = ('uz', 'en')
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'uz'
+
+
+ROSETTA_MESSAGES_PER_PAGE = 100
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_FILENAME_GENERATOR = 'utils.get_filename'

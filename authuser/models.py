@@ -8,6 +8,8 @@ class UserModel(AbstractUser):
     phone_number = models.CharField(max_length=30, blank=True, null=True)
     email = models.EmailField()
     date_joined = models.DateTimeField(auto_now_add=True)
+    course = models.ManyToManyField(CourseBig, blank=True)
+    image = models.ImageField(upload_to='images/', blank=True, null=True)
     first_name = None
     last_name = None
     is_staff = None
@@ -21,6 +23,4 @@ class UserModel(AbstractUser):
         return self.full_name
 
 
-class UserProfileModel(models.Model):
-    user = models.OneToOneField(UserModel, on_delete=models.CASCADE)
-    course = models.ManyToManyField(CourseBig)
+

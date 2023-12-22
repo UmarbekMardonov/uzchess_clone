@@ -20,8 +20,8 @@ class Mentor(models.Model):
 
 
 class CourseBig(models.Model):
-    title = models.CharField(max_length=220)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    title = models.CharField(max_length=220, blank=True, null=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     discount = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     rating = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     likes = models.ManyToManyField(User, related_name='User', blank=True)

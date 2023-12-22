@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
-from .models import UserModel, UserProfileModel
+from .models import UserModel
 from course.serializers import CourseBigSerializer
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -53,9 +53,8 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
 class ProfileSerializer(serializers.ModelSerializer):
-    user = RegisterSerializer()
     course = CourseBigSerializer()
 
     class Meta:
-        model = UserProfileModel
-        fields = '__all__'
+        model = UserModel
+        fields = ['full_name', 'phone_number', 'email', 'course']
