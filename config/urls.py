@@ -26,6 +26,7 @@ urlpatterns = [
     path('auth/', include('authuser.urls')),
     path('library/', include('library.urls')),
 
+
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

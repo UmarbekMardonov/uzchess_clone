@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rosetta',
 
+
     # local app
     'course',
     'news',
@@ -65,6 +66,13 @@ MODELTRANSLATION_DEFAULT_LANGUAGE = 'uz'
 
 
 ROSETTA_MESSAGES_PER_PAGE = 100
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "umarbekmardonov7@gmail.com"
+EMAIL_HOST_PASSWORD = "Umarbek_07"
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_FILENAME_GENERATOR = 'utils.get_filename'

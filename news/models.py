@@ -10,5 +10,11 @@ class News(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        verbose_name = 'News'
+        verbose_name_plural = 'News'
+
     def __str__(self):
         return self.title
+
+
